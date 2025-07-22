@@ -1,0 +1,295 @@
+body, :root {
+  margin: 0;
+  padding: 0;
+}
+
+.secondheader{
+  height: 115px;
+}
+
+.icon-circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Needed to contain the pseudo element */
+  transition: background-color 0.3s ease;
+}
+
+.icon-circle::before {
+  content: "";
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff0000;
+  z-index: 1;
+  transition: bottom 0.3s ease;
+  border-radius: 10%;
+}
+
+.icon-circle:hover::before {
+  bottom: 0;
+}
+
+.icon-circle i {
+  color: #555;
+  font-size: 18px;
+  z-index: 2; /* Keep icon above the fill */
+  transition: color 0.3s ease;
+}
+
+.icon-circle:hover i {
+  color: #fff;
+}
+
+
+.darkbg{
+  height: 50px;
+}
+
+
+.nav-link {
+  transition: color 0.3s ease;  /* smooth transition for color */
+}
+
+.nav-link:hover {
+  color: red !important;  /* turn red on hover */
+}
+
+.third-header-nav {
+  z-index: 10;
+}
+
+.carousel-item img {
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;
+  height: 100vh;                
+  
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  margin: 0 6px;
+  border: none;
+  border-radius: 0; /* 👈 no border-radius = square */
+}
+
+.carousel-custom button {
+  width: 16px !important;
+  height: 16px !important;
+  border: 2px solid white !important;
+  border-radius: 0 !important; /* Makes it square */
+  background-color: transparent !important;
+  margin: 0 4px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.carousel-custom .active {
+  background-color: white !important;
+}
+
+
+.d-flex.justify-content-center.gap-3 i {
+  transition: color 0.3s ease;
+}
+
+.d-flex.justify-content-center.gap-3 i:hover {
+  color: rgb(234, 62, 62) !important;
+  cursor: pointer;
+}
+
+.btn-red-hover {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-red-hover:hover {
+  background-color: rgb(226, 48, 48) !important;
+  border-color: rgb(226, 48, 48) !important;
+}
+
+.product-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px); /* Lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Elevation */
+}
+
+/* Optional: Zoom image on hover */
+.product-card img {
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+
+.post-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.post-card:hover {
+  transform: translateY(-6px); /* lift up */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* subtle shadow */
+}
+
+.post-card img {
+  transition: transform 0.4s ease;
+}
+
+.post-card:hover img {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.hero-title {
+  font-size: 2rem;
+  letter-spacing: 0.5em;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+.hero-desc {
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hero-desc {
+    font-size: 1.25rem;
+  }
+}
+
+.hero-section {
+  background-size: cover;       /* fills fully */
+  background-position: center;  /* centers the image */
+  background-repeat: no-repeat;
+  height: 100vh;                /* full screen height */
+  width: 100%;
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  transition: transform 0.4s ease;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* Diagonal triangle overlays */
+.image-wrapper::before,
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.284);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.image-wrapper::after {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.image-wrapper:hover::before,
+.image-wrapper:hover::after {
+  opacity: 1;
+}
+
+.logo-overlay-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 120px;
+  height: 80px;
+  background-color: #fff;
+  transition: transform 0.4s ease;
+}
+
+.logo-overlay-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Overlay */
+.logo-overlay-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(128, 128, 128, 0.3); /* grey overlay */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.logo-overlay-wrapper:hover::before {
+  opacity: 1;
+}
+
+.hover-image-wrapper {
+  position: relative;
+  overflow: hidden;
+ 
+}
+
+.hover-image-wrapper img {
+  transition: transform 0.4s ease;
+}
+
+.hover-image-wrapper:hover img {
+  transform: scale(1.1);
+}
+
+.hover-image-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(128, 128, 128, 0.2);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.hover-image-wrapper:hover::before {
+  opacity: 1;
+}
+
