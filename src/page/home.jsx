@@ -472,83 +472,64 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Footer Columns */}
-          <div className="row text-start">
-            {/* Contact Us */}
-            <div className="col-md-6 col-lg-3 mb-4">
-              <h6 className="fw-bold mb-3">CONTACT US</h6>
-              <p>
-                <i className="bi bi-house-door me-2 text-muted"></i>8888 South
-                Avenue Street, New York
-              </p>
-              <p>
-                <i className="bi bi-telephone me-2 text-muted"></i>(12) 3 456
-                7896
-              </p>
-              <p>
-                <i className="bi bi-telephone me-2 text-muted"></i>(12) 3 456
-                7895
-              </p>
-              <p>
-                <i className="bi bi-envelope me-2 text-muted"></i>
-                info@yourdomain.com
-              </p>
-              <p>
-                <i className="bi bi-envelope me-2 text-muted"></i>
-                info@yourdomain.com
-              </p>
-            </div>
+        <div className="row text-start">
+  {/* Contact Us */}
+  <div className="col-md-6 col-lg-3 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
+    <h6 className="fw-bold mb-3">CONTACT US</h6>
+    <p><i className="bi bi-house-door me-2 text-muted"></i>8888 South Avenue Street, New York</p>
+    <p><i className="bi bi-telephone me-2 text-muted"></i>(12) 3 456 7896</p>
+    <p><i className="bi bi-telephone me-2 text-muted"></i>(12) 3 456 7895</p>
+    <p><i className="bi bi-envelope me-2 text-muted"></i>info@yourdomain.com</p>
+    <p><i className="bi bi-envelope me-2 text-muted"></i>info@yourdomain.com</p>
+  </div>
 
-            {/* Service */}
-            <div className="col-md-6 col-lg-2 mb-4">
-              <h6 className="fw-bold mb-3">SERVICE</h6>
-              <ul className="list-unstyled text-muted">
-                <li className="mb-2">Prices & Currencies</li>
-                <li className="mb-2">Secure Payment</li>
-                <li className="mb-2">Delivery Times & Costs</li>
-                <li className="mb-2">Returns & Exchanges</li>
-                <li className="mb-2">FAQ's</li>
-              </ul>
-            </div>
+  {/* Service */}
+  <div className="col-md-6 col-lg-2 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
+    <h6 className="fw-bold mb-3">SERVICE</h6>
+    <ul className="list-unstyled text-muted">
+      <li className="mb-2">Prices & Currencies</li>
+      <li className="mb-2">Secure Payment</li>
+      <li className="mb-2">Delivery Times & Costs</li>
+      <li className="mb-2">Returns & Exchanges</li>
+      <li className="mb-2">FAQ's</li>
+    </ul>
+  </div>
 
-            {/* Account */}
-            <div className="col-md-6 col-lg-2 mb-4">
-              <h6 className="fw-bold mb-3">ACCOUNT</h6>
-              <ul className="list-unstyled text-muted">
-                <li className="mb-2">My account</li>
-                <li className="mb-2">Wishlist</li>
-                <li className="mb-2">Order history</li>
-                <li className="mb-2">Specials</li>
-                <li className="mb-2">Gift vouchers</li>
-              </ul>
-            </div>
+  {/* Account */}
+  <div className="col-md-6 col-lg-2 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
+    <h6 className="fw-bold mb-3">ACCOUNT</h6>
+    <ul className="list-unstyled text-muted">
+      <li className="mb-2">My account</li>
+      <li className="mb-2">Wishlist</li>
+      <li className="mb-2">Order history</li>
+      <li className="mb-2">Specials</li>
+      <li className="mb-2">Gift vouchers</li>
+    </ul>
+  </div>
 
-            {/* Information */}
-            <div className="col-md-6 col-lg-2 mb-4">
-              <h6 className="fw-bold mb-3">INFORMATION</h6>
-              <ul className="list-unstyled text-muted">
-                <li className="mb-2">My account</li>
-                <li className="mb-2">Wishlist</li>
-                <li className="mb-2">Order history</li>
-                <li className="mb-2">Specials</li>
-                <li className="mb-2">Gift vouchers</li>
-              </ul>
-            </div>
+  {/* Information */}
+  <div className="col-md-6 col-lg-2 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
+    <h6 className="fw-bold mb-3">INFORMATION</h6>
+    <ul className="list-unstyled text-muted">
+      <li className="mb-2">My account</li>
+      <li className="mb-2">Wishlist</li>
+      <li className="mb-2">Order history</li>
+      <li className="mb-2">Specials</li>
+      <li className="mb-2">Gift vouchers</li>
+    </ul>
+  </div>
 
-            {/* Newsletter */}
-            <div className="col-md-6 col-lg-3 mb-4">
-              <h6 className="fw-bold mb-3">NEWSLETTER</h6>
-              <p className="text-muted">Register your email for news</p>
-              <div className="input-group">
-                <input
-                  type="email"
-                  className="form-control rounded-0"
-                  placeholder="Your email here"
-                />
-            <button className="btn btn-dark rounded-0 btn-red-hover">SUBSCRIBE</button>
-              </div>
-            </div>
-          </div>
+  {/* Newsletter */}
+  <div className="col-md-6 col-lg-3 mb-4 text-center text-md-start d-flex flex-column align-items-center align-items-md-start">
+    <h6 className="fw-bold mb-3">NEWSLETTER</h6>
+    <p className="text-muted">Register your email for news</p>
+    <div className="input-group">
+      <input type="email" className="form-control rounded-0" placeholder="Your email here" />
+      <button className="btn btn-dark rounded-0 btn-red-hover">SUBSCRIBE</button>
+    </div>
+  </div>
+</div>
+
         </div>
 
         {/* Copyright */}

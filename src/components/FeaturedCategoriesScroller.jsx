@@ -1,110 +1,113 @@
 import { useState, useEffect } from "react";
-import { latestPostsData } from "../constant/data";
+import { featuredCategoryData } from "../constant/data";
 
-export default function LatestPostsScroller() {
-  const responsive = {
-    desktop: { min: 1024, items: 3 },
-    tablet: { min: 576, items: 2 },
-    mobile: { min: 0, items: 1 },
-  };
+const responsive = {
+  desktop: { max: 5000, min: 1024, items: 4 },
+  tablet: { max: 1024, min: 576, items: 2 },
+  mobile: { max: 576, min: 0, items: 1 },
+};
 
-  const [startIndex, setStartIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(1);
-  const [cardWidth, setCardWidth] = useState("100%");
+export default function FeaturedCategoriesScroller({ heading = "FEATURED CATEGORIES" }) {
+  const totalItems = featuredCategoryData.length;
 
-  const updateResponsive = () => {
+  const getItemsPerSlide = () => {
     const width = window.innerWidth;
-    if (width >= responsive.desktop.min) {
-      setItemsPerPage(responsive.desktop.items);
-      setCardWidth("calc((100% - 2rem) / 3)"); // 3 cards with 1rem gap between
-    } else if (width >= responsive.tablet.min) {
-      setItemsPerPage(responsive.tablet.items);
-      setCardWidth("calc((100% - 1rem) / 2)"); // 2 cards with 1rem gap
+    if (width >= responsive.desktop.min && width <= responsive.desktop.max) {
+      return Math.min(responsive.desktop.items, totalItems);
+    } else if (width >= responsive.tablet.min && width < responsive.tablet.max) {
+      return Math.min(responsive.tablet.items, totalItems);
     } else {
-      setItemsPerPage(responsive.mobile.items);
-      setCardWidth("100%");
+      return Math.min(responsive.mobile.items, totalItems);
     }
   };
 
+  const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide());
+  const [startIndex, setStartIndex] = useState(0);
+
   useEffect(() => {
-    updateResponsive();
-    window.addEventListener("resize", updateResponsive);
-    return () => window.removeEventListener("resize", updateResponsive);
-  }, []);
+    const handleResize = () => setItemsPerSlide(getItemsPerSlide());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [totalItems]);
 
-  const handlePrev = () => {
-    setStartIndex((prev) => (prev - itemsPerPage + latestPostsData.length) % latestPostsData.length);
+  // Removed auto sliding interval useEffect
+
+  const nextSlide = () => setStartIndex((prev) => (prev + 1) % totalItems);
+  const prevSlide = () => setStartIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
+
+  const getVisibleItems = () => {
+    const visible = [];
+    for (let i = 0; i < itemsPerSlide; i++) {
+      visible.push(featuredCategoryData[(startIndex + i) % totalItems]);
+    }
+    return visible;
   };
-
-  const handleNext = () => {
-    setStartIndex((prev) => (prev + itemsPerPage) % latestPostsData.length);
-  };
-
-  const visibleItems = [];
-  for (let i = 0; i < itemsPerPage; i++) {
-    visibleItems.push(latestPostsData[(startIndex + i) % latestPostsData.length]);
-  }
 
   return (
     <div className="container my-5">
+      {/* Header and buttons */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h4 className="fw-bold m-0">Latest Posts</h4>
-        <div className="d-flex gap-2">
-          <button
-            onClick={handlePrev}
-            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
-            style={{ width: "40px", height: "40px" }}
-            aria-label="Previous posts"
-          >
-            <i className="bi bi-chevron-left"></i>
-          </button>
-          <button
-            onClick={handleNext}
-            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
-            style={{ width: "40px", height: "40px" }}
-            aria-label="Next posts"
-          >
-            <i className="bi bi-chevron-right"></i>
-          </button>
-        </div>
+        <h4 className="fw-bold mb-0">{heading}</h4>
+        {totalItems > 1 && (
+          <div className="d-flex gap-2">
+            <button
+              onClick={prevSlide}
+              className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              aria-label="Previous"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              onClick={nextSlide}
+              className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              aria-label="Next"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="d-flex overflow-hidden" style={{ gap: "1rem" }}>
-        {visibleItems.map((post) => (
-          <div
-            key={post.id}
-            className="flex-shrink-0"
-            style={{ width: cardWidth }}
-          >
-            <div className="card border-0 shadow-sm h-100">
-              <img
-                src={post.image}
-                alt={post.boldTitle}
-                className="card-img-top"
-                style={{ height: "300px", objectFit: "cover" }}
-              />
-              <div className="card-body p-3">
-                <div className="d-flex align-items-center mb-2">
-                  <div
-                    className="d-flex flex-column justify-content-center align-items-center border border-2 me-3"
-                    style={{ width: "60px", height: "80px" }}
-                  >
-                    <span className="fw-bold fs-5">{post.day}</span>
-                    <small className="text-uppercase">{post.month}</small>
-                  </div>
-                  <div>
-                    <small className="text-danger text-uppercase">
-                      {post.smallTitle}
-                    </small>
-                    <h6 className="fw-bold mb-1">{post.boldTitle}</h6>
-                    <p className="text-muted small mb-0">{post.description}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+    <div className="d-flex overflow-hidden" style={{ gap: "16px" }}>
+  <div
+    className="d-flex"
+    style={{ width: "100%", transition: "transform 0.6s ease" }}
+  >
+    {getVisibleItems().map((item) => (
+      <div
+        key={item.id}
+        className="card border-0 shadow-sm"
+        style={{
+          flex: "1 0 auto",  // Equal flexible width for all cards
+          borderRadius: 0,
+          overflow: "hidden",
+          padding:3,
+        }}
+      >
+        <div className="hover-image-wrapper position-relative w-100 h-100 overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="card-img-top"
+          style={{
+            height: "220px",
+            width: "100%",
+          
+            borderRadius: 0,
+            display: "block",
+          }}
+        />
+         <div className="overlay d-flex flex-column justify-content-center align-items-center">
+        <button className="btn btn-light read-more-btn fs-6 fs-md-5">Read More</button>
       </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 }
