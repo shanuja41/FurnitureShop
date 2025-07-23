@@ -4,43 +4,38 @@ import { latestPostsData } from "../constant/data";
 export default function LatestPostsScroller() {
   const totalItems = latestPostsData.length;
   const [startIndex, setStartIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(1); // default mobile 1 card
+  const [itemsPerPage, setItemsPerPage] = useState(1);
 
   // Update itemsPerPage based on window width
-  const updateItemsPerPage = () => {
-    if (window.innerWidth >= 992) {
-      setItemsPerPage(3); // desktop
-    } else if (window.innerWidth >= 768) {
-      setItemsPerPage(2); // tablet
-    } else {
-      setItemsPerPage(1); // mobile
-    }
-  };
-
   useEffect(() => {
-    updateItemsPerPage(); // initial check
-
-    window.addEventListener("resize", updateItemsPerPage);
-    return () => {
-      window.removeEventListener("resize", updateItemsPerPage);
-    };
+    function updateItems() {
+      if (window.innerWidth >= 992) {
+        setItemsPerPage(3);
+      } else if (window.innerWidth >= 768) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(1);
+      }
+    }
+    updateItems();
+    window.addEventListener("resize", updateItems);
+    return () => window.removeEventListener("resize", updateItems);
   }, []);
 
-  // Handle previous button - cycle properly with current itemsPerPage
+  // Calculate max start index to avoid overflow
+  const maxStartIndex = Math.max(totalItems - itemsPerPage, 0);
+
+  // Handle prev with proper wrap-around
   const handlePrev = () => {
-    setStartIndex((prev) =>
-      prev === 0 ? totalItems - itemsPerPage : prev - 1
-    );
+    setStartIndex((prev) => (prev === 0 ? maxStartIndex : prev - 1));
   };
 
-  // Handle next button
+  // Handle next with proper wrap-around
   const handleNext = () => {
-    setStartIndex((prev) =>
-      prev >= totalItems - itemsPerPage ? 0 : prev + 1
-    );
+    setStartIndex((prev) => (prev === maxStartIndex ? 0 : prev + 1));
   };
 
-  // Calculate visible items dynamically
+  // Get visible items based on current startIndex and itemsPerPage
   const visibleItems = [];
   for (let i = 0; i < itemsPerPage; i++) {
     visibleItems.push(latestPostsData[(startIndex + i) % totalItems]);
@@ -53,8 +48,8 @@ export default function LatestPostsScroller() {
         <div className="d-flex gap-2">
           <button
             onClick={handlePrev}
-            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
-            style={{ width: "40px", height: "40px" }}
+            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
+            style={{ width: 40, height: 40 }}
             aria-label="Previous posts"
           >
             <i className="bi bi-chevron-left"></i>
@@ -62,8 +57,8 @@ export default function LatestPostsScroller() {
 
           <button
             onClick={handleNext}
-            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
-            style={{ width: "40px", height: "40px" }}
+            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
+            style={{ width: 40, height: 40 }}
             aria-label="Next posts"
           >
             <i className="bi bi-chevron-right"></i>
@@ -77,24 +72,24 @@ export default function LatestPostsScroller() {
             key={post.id}
             className={`col-12 ${
               itemsPerPage === 1
-                ? "" // mobile: full width col-12
+                ? ""
                 : itemsPerPage === 2
                 ? "col-md-6"
                 : "col-lg-4"
             } mb-4`}
           >
-            <div className="card border-0 shadow-sm h-100 post-card">
+            <article className="card border-0 shadow-sm h-100">
               <img
                 src={post.image}
                 alt={post.boldTitle}
                 className="card-img-top"
-                style={{ height: "300px" }}
+                style={{ height: 300, width: "100%", objectFit: "cover" }}
               />
               <div className="card-body p-3">
                 <div className="d-flex align-items-center mb-2">
                   <div
                     className="d-flex flex-column justify-content-center align-items-center border border-2 me-3"
-                    style={{ width: "60px", height: "80px" }}
+                    style={{ width: 60, height: 80 }}
                   >
                     <span className="fw-bold fs-5">{post.day}</span>
                     <small className="text-uppercase">{post.month}</small>
@@ -108,7 +103,7 @@ export default function LatestPostsScroller() {
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
         ))}
       </div>
