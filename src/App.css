@@ -264,32 +264,33 @@ body, :root {
 .logo-overlay-wrapper:hover::before {
   opacity: 1;
 }
-
 .hover-image-wrapper {
   position: relative;
-  overflow: hidden;
- 
 }
 
-.hover-image-wrapper img {
-  transition: transform 0.4s ease;
-}
-
-.hover-image-wrapper:hover img {
-  transform: scale(1.1);
-}
-
-.hover-image-wrapper::before {
-  content: '';
+.overlay {
   position: absolute;
-  inset: 0;
-  background: rgba(128, 128, 128, 0.2);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.6); /* Gray with transparency */
   opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
-.hover-image-wrapper:hover::before {
+.read-more-btn {
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+.hover-image-wrapper:hover .overlay {
   opacity: 1;
 }
 
+.hover-image-wrapper:hover .read-more-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
