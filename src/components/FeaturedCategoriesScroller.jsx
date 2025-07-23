@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { featuredCategoryData } from '../constant/data';
-import { CardFooter } from 'react-bootstrap';
+import { useEffect, useRef, useState } from "react";
+import { featuredCategoryData } from "../constant/data";
+import { CardFooter } from "react-bootstrap";
 
 export default function FeaturedCategoriesScroller() {
-  const itemsPerPage = 6;  // changed here
+  const itemsPerPage = 6;
   const cardCount = featuredCategoryData.length;
   const [currentIndex, setCurrentIndex] = useState(cardCount); // start from middle
   const containerRef = useRef(null);
@@ -18,20 +18,20 @@ export default function FeaturedCategoriesScroller() {
     const totalLength = cardCount * 3;
     if (currentIndex >= totalLength - itemsPerPage) {
       const timeout = setTimeout(() => {
-        containerRef.current.style.transition = 'none';
+        containerRef.current.style.transition = "none";
         setCurrentIndex(cardCount);
       }, 600);
       return () => clearTimeout(timeout);
     }
     if (currentIndex <= 0) {
       const timeout = setTimeout(() => {
-        containerRef.current.style.transition = 'none';
+        containerRef.current.style.transition = "none";
         setCurrentIndex(cardCount);
       }, 600);
       return () => clearTimeout(timeout);
     }
 
-    containerRef.current.style.transition = 'transform 0.6s ease-in-out';
+    containerRef.current.style.transition = "transform 0.6s ease-in-out";
   }, [currentIndex, cardCount]);
 
   const handlePrev = () => setCurrentIndex((prev) => prev - 1);
@@ -41,8 +41,6 @@ export default function FeaturedCategoriesScroller() {
 
   return (
     <div className="container-fluid py-5 bg-light">
-      
-
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h4 className="fw-bold ps-2">FEATURED CATEGORIES</h4>
         <div>
@@ -80,24 +78,27 @@ export default function FeaturedCategoriesScroller() {
             >
               <div className="me-0 rounded-4 shadow-sm mx-2 bg-white h-100">
                 <div className=" d-flex flex-column align-items-center text-center h-100">
-                   <div className="hover-image-wrapper w-100 h-100">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="img-fluid"
-                    style={{
-                      height: '200px',
-                      width: '100%',
-                    }}
-                  />
-                        {/* Overlay */}
-      <div className="overlay d-flex flex-column justify-content-center align-items-center">
-       <button className="btn btn-dark rounded-0 read-more-btn ">VIEW NOW</button>
+                  <div className="hover-image-wrapper w-100 h-100">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="img-fluid"
+                      style={{
+                        height: "200px",
+                        width: "100%",
+                      }}
+                    />
+                    {/* Overlay */}
+                    <div className="overlay d-flex flex-column justify-content-center align-items-center">
+                      <button className="btn btn-dark rounded-0 read-more-btn ">
+                        VIEW NOW
+                      </button>
 
-        <p className="mb-0 text-dark fw-bold text-uppercase small pt-4">exclusive furniture design</p>
-      
-      </div>
-                </div>
+                      <p className="mb-0 text-dark fw-bold text-uppercase small pt-4">
+                        exclusive furniture design
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { logoData } from '../constant/data';
+import { useState } from "react";
+import { logoData } from "../constant/data";
 
 export default function LogoScroller() {
   const itemsPerPage = 6;
@@ -32,14 +32,14 @@ export default function LogoScroller() {
           <button
             onClick={handlePrev}
             className="btn btn-outline-danger me-2 border"
-            style={{ width: '36px', height: '36px' }}
+            style={{ width: "36px", height: "36px" }}
           >
             &#8592;
           </button>
           <button
             onClick={handleNext}
             className="btn btn-outline-danger me-2 border"
-            style={{ width: '36px', height: '36px' }}
+            style={{ width: "36px", height: "36px" }}
           >
             &#8594;
           </button>
@@ -55,23 +55,22 @@ export default function LogoScroller() {
             <div
               className="d-flex align-items-center justify-content-center "
               style={{
-                width: '120px',
-                height: '80px',
-            
-                backgroundColor: '#fff',
-            
+                width: "120px",
+                height: "80px",
+
+                backgroundColor: "#fff",
               }}
             >
               <div className="logo-overlay-wrapper">
-              <img
-                src={logo.image}
-                alt={logo.alt}
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  objectFit: 'cover',
-                }}
-              />
+                <img
+                  src={logo.image}
+                  alt={logo.alt}
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    objectFit: "cover",
+                  }}
+                />
               </div>
             </div>
           </div>

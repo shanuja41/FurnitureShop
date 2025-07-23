@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { latestPostsData } from '../constant/data';
+import { useState, useEffect } from "react";
+import { latestPostsData } from "../constant/data";
 
 export default function LatestPostsScroller() {
   const itemsPerPageDesktop = 3;
@@ -21,11 +21,11 @@ export default function LatestPostsScroller() {
     updateItemsPerPage(); // set on mount
 
     // Add resize listener
-    window.addEventListener('resize', updateItemsPerPage);
+    window.addEventListener("resize", updateItemsPerPage);
 
     // Cleanup listener on unmount
     return () => {
-      window.removeEventListener('resize', updateItemsPerPage);
+      window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
@@ -52,7 +52,7 @@ export default function LatestPostsScroller() {
           <button
             onClick={handlePrev}
             className="btn btn-outline-danger me-2 border"
-            style={{ width: '36px', height: '36px' }}
+            style={{ width: "36px", height: "36px" }}
             aria-label="Previous posts"
           >
             &#8592;
@@ -60,7 +60,7 @@ export default function LatestPostsScroller() {
           <button
             onClick={handleNext}
             className="btn btn-outline-danger me-2 border"
-            style={{ width: '36px', height: '36px' }}
+            style={{ width: "36px", height: "36px" }}
             aria-label="Next posts"
           >
             &#8594;
@@ -80,19 +80,21 @@ export default function LatestPostsScroller() {
                 src={post.image}
                 alt={post.boldTitle}
                 className="card-img-top"
-                style={{ height: '300px',}} // image cover
+                style={{ height: "300px" }} // image cover
               />
               <div className="card-body p-3">
                 <div className="d-flex align-items-center mb-2">
                   <div
                     className="d-flex flex-column justify-content-center align-items-center border border-2 me-3"
-                    style={{ width: '60px', height: '80px' }}
+                    style={{ width: "60px", height: "80px" }}
                   >
                     <span className="fw-bold fs-5">{post.day}</span>
                     <small className="text-uppercase">{post.month}</small>
                   </div>
                   <div>
-                    <small className="text-danger text-uppercase">{post.smallTitle}</small>
+                    <small className="text-danger text-uppercase">
+                      {post.smallTitle}
+                    </small>
                     <h6 className="fw-bold mb-1">{post.boldTitle}</h6>
                     <p className="text-muted small mb-0">{post.description}</p>
                   </div>
