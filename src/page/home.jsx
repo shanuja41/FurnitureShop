@@ -439,9 +439,9 @@ export default function Home() {
               }`}
               style={{ borderColor: "#dee2e6" }}
             >
-              <Icon size={48} className="mb-3 text-dark" />
-              <h5 className="text-uppercase fw-bold">{title}</h5>
-              <p className="text-muted small">{description}</p>
+              <Icon size={48} className="mb-3 text-dark red-hover" />
+              <h5 className="text-uppercase fw-bold red-hover">{title}</h5>
+              <p className="text-muted small red-hover">{description}</p>
             </div>
           ))}
         </div>
@@ -465,10 +465,10 @@ export default function Home() {
               type and scrambled it to make a type specimen book.
             </p>
             <div className="d-flex justify-content-center gap-3">
-              <i className="bi bi-facebook text-muted fs-5"></i>
-              <i className="bi bi-twitter text-muted fs-5"></i>
-              <i className="bi bi-google text-muted fs-5"></i>
-              <i className="bi bi-pinterest text-muted fs-5"></i>
+              <i className="bi bi-facebook text-muted fs-5 red-hover"></i>
+              <i className="bi bi-twitter text-muted fs-5 red-hover"></i>
+              <i className="bi bi-google text-muted fs-5 red-hover"></i>
+              <i className="bi bi-pinterest text-muted fs-5 red-hover"></i>
             </div>
           </div>
 
