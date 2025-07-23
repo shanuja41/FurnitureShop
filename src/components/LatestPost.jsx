@@ -3,7 +3,7 @@ import { latestPostsData } from "../constant/data";
 
 export default function LatestPostsScroller() {
   const totalItems = latestPostsData.length;
-  const [startIndex, setStartIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(1);
 
   // Update itemsPerPage based on window width
@@ -66,7 +66,7 @@ export default function LatestPostsScroller() {
         </div>
       </div>
 
-      <div className="row">
+      <div className="row" key={startIndex}>
         {visibleItems.map((post) => (
           <div
             key={post.id}
