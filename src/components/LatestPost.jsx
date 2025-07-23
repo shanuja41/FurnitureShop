@@ -2,43 +2,45 @@ import { useState, useEffect } from "react";
 import { latestPostsData } from "../constant/data";
 
 export default function LatestPostsScroller() {
-  const itemsPerPageDesktop = 3;
-  const itemsPerPageTablet = 2;
-  const itemsPerPageMobile = 1;
-
   const totalItems = latestPostsData.length;
   const [startIndex, setStartIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageMobile); // default 1 initially
+  const [itemsPerPage, setItemsPerPage] = useState(1); // default mobile 1 card
 
-  // Function to determine items per page based on window width
+  // Update itemsPerPage based on window width
   const updateItemsPerPage = () => {
-    if (window.innerWidth >= 992) setItemsPerPage(itemsPerPageDesktop);
-    else if (window.innerWidth >= 768) setItemsPerPage(itemsPerPageTablet);
-    else setItemsPerPage(itemsPerPageMobile);
+    if (window.innerWidth >= 992) {
+      setItemsPerPage(3); // desktop
+    } else if (window.innerWidth >= 768) {
+      setItemsPerPage(2); // tablet
+    } else {
+      setItemsPerPage(1); // mobile
+    }
   };
 
   useEffect(() => {
-    updateItemsPerPage(); // set on mount
+    updateItemsPerPage(); // initial check
 
-    // Add resize listener
     window.addEventListener("resize", updateItemsPerPage);
-
-    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
-  // Handle previous and next buttons
+  // Handle previous button - cycle properly with current itemsPerPage
   const handlePrev = () => {
-    setStartIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
+    setStartIndex((prev) =>
+      prev === 0 ? totalItems - itemsPerPage : prev - 1
+    );
   };
 
+  // Handle next button
   const handleNext = () => {
-    setStartIndex((prev) => (prev === totalItems - 1 ? 0 : prev + 1));
+    setStartIndex((prev) =>
+      prev >= totalItems - itemsPerPage ? 0 : prev + 1
+    );
   };
 
-  // Get visible items for current slide
+  // Calculate visible items dynamically
   const visibleItems = [];
   for (let i = 0; i < itemsPerPage; i++) {
     visibleItems.push(latestPostsData[(startIndex + i) % totalItems]);
@@ -50,39 +52,43 @@ export default function LatestPostsScroller() {
         <h4 className="fw-bold m-0">Latest Posts</h4>
         <div className="d-flex gap-2">
           <button
-  onClick={handlePrev}
-  className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
-  style={{ width: "40px", height: "40px" }}
-  aria-label="Previous posts"
->
-  <i className="bi bi-chevron-left"></i>
-</button>
+            onClick={handlePrev}
+            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+            style={{ width: "40px", height: "40px" }}
+            aria-label="Previous posts"
+          >
+            <i className="bi bi-chevron-left"></i>
+          </button>
 
-<button
-  onClick={handleNext}
-  className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
-  style={{ width: "40px", height: "40px" }}
-  aria-label="Next posts"
->
-  <i className="bi bi-chevron-right"></i>
-</button>
-
+          <button
+            onClick={handleNext}
+            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+            style={{ width: "40px", height: "40px" }}
+            aria-label="Next posts"
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
 
-      <div className="d-flex overflow-hidden">
+      <div className="row">
         {visibleItems.map((post) => (
           <div
             key={post.id}
-            className="flex-shrink-0 me-3"
-            style={{ minWidth: `${100 / itemsPerPage}%` }}
+            className={`col-12 ${
+              itemsPerPage === 1
+                ? "" // mobile: full width col-12
+                : itemsPerPage === 2
+                ? "col-md-6"
+                : "col-lg-4"
+            } mb-4`}
           >
-            <div className="card border-0 shadow-sm post-card">
+            <div className="card border-0 shadow-sm h-100 post-card">
               <img
                 src={post.image}
                 alt={post.boldTitle}
                 className="card-img-top"
-                style={{ height: "300px" }} // image cover
+                style={{ height: "300px" }}
               />
               <div className="card-body p-3">
                 <div className="d-flex align-items-center mb-2">

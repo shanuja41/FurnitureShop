@@ -30,8 +30,6 @@ export default function FeaturedCategoriesScroller({ heading = "FEATURED CATEGOR
     return () => window.removeEventListener("resize", handleResize);
   }, [totalItems]);
 
-  // Removed auto sliding interval useEffect
-
   const nextSlide = () => setStartIndex((prev) => (prev + 1) % totalItems);
   const prevSlide = () => setStartIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
 
@@ -70,44 +68,52 @@ export default function FeaturedCategoriesScroller({ heading = "FEATURED CATEGOR
         )}
       </div>
 
-    <div className="d-flex overflow-hidden" style={{ gap: "16px" }}>
-  <div
-    className="d-flex"
-    style={{ width: "100%", transition: "transform 0.6s ease" }}
-  >
-    {getVisibleItems().map((item) => (
-      <div
-        key={item.id}
-        className="card border-0 shadow-sm"
-        style={{
-          flex: "1 0 auto",  // Equal flexible width for all cards
-          borderRadius: 0,
-          overflow: "hidden",
-          padding:3,
-        }}
-      >
-        <div className="hover-image-wrapper position-relative w-100 h-100 overflow-hidden">
-        <img
-          src={item.image}
-          alt={item.title}
-          className="card-img-top"
-          style={{
-            height: "220px",
-            width: "100%",
-          
-            borderRadius: 0,
-            display: "block",
-          }}
-        />
-         <div className="overlay d-flex flex-column justify-content-center align-items-center">
-        <button className="btn btn-light read-more-btn fs-6 fs-md-5">Read More</button>
+      <div className="d-flex overflow-hidden" style={{ gap: "16px" }}>
+        <div
+          className="d-flex"
+          style={{ width: "100%", transition: "transform 0.6s ease" }}
+        >
+          {getVisibleItems().map((item) => (
+            <div
+              key={item.id}
+              className="card border-0 shadow-sm"
+              style={{
+                flex: `0 0 calc((100% - ${(itemsPerSlide - 1) * 16}px) / ${itemsPerSlide})`,
+                borderRadius: 0,
+                overflow: "hidden",
+                padding: 3,
+                height: "280px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                className="hover-image-wrapper position-relative w-100"
+                style={{ flex: "0 0 auto", height: "220px", overflow: "hidden" }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="card-img-top"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                   
+                    borderRadius: 0,
+                    display: "block",
+                  }}
+                />
+                <div className="overlay d-flex flex-column justify-content-center align-items-center">
+                  <button className="btn btn-light read-more-btn fs-6 fs-md-5">
+                    Read More
+                  </button>
+                </div>
+              </div>
+              {/* Add other card content below if needed */}
+            </div>
+          ))}
+        </div>
       </div>
-      </div>
-      </div>
-    ))}
-  </div>
-</div>
-
     </div>
   );
 }
