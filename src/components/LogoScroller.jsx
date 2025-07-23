@@ -30,19 +30,21 @@ export default function LogoScroller() {
         <h5 className="fw-bold">Our Partners</h5>
         <div className="d-flex gap-2">
           <button
-            onClick={handlePrev}
-            className="btn btn-outline-danger me-2 border"
-            style={{ width: "36px", height: "36px" }}
-          >
-            &#8592;
-          </button>
-          <button
-            onClick={handleNext}
-            className="btn btn-outline-danger me-2 border"
-            style={{ width: "36px", height: "36px" }}
-          >
-            &#8594;
-          </button>
+              onClick={handlePrev}
+              className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              aria-label="Previous"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              onClick={handleNext}
+              className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+              style={{ width: "40px", height: "40px" }}
+              aria-label="Next"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
         </div>
       </div>
 

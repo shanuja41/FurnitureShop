@@ -50,21 +50,23 @@ export default function LatestPostsScroller() {
         <h4 className="fw-bold m-0">Latest Posts</h4>
         <div className="d-flex gap-2">
           <button
-            onClick={handlePrev}
-            className="btn btn-outline-danger me-2 border"
-            style={{ width: "36px", height: "36px" }}
-            aria-label="Previous posts"
-          >
-            &#8592;
-          </button>
-          <button
-            onClick={handleNext}
-            className="btn btn-outline-danger me-2 border"
-            style={{ width: "36px", height: "36px" }}
-            aria-label="Next posts"
-          >
-            &#8594;
-          </button>
+  onClick={handlePrev}
+  className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+  style={{ width: "40px", height: "40px" }}
+  aria-label="Previous posts"
+>
+  <i className="bi bi-chevron-left"></i>
+</button>
+
+<button
+  onClick={handleNext}
+  className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
+  style={{ width: "40px", height: "40px" }}
+  aria-label="Next posts"
+>
+  <i className="bi bi-chevron-right"></i>
+</button>
+
         </div>
       </div>
 
