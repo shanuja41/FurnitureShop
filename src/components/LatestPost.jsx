@@ -48,7 +48,7 @@ export default function LatestPostsScroller() {
         <div className="d-flex gap-2">
           <button
             onClick={handlePrev}
-            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
+            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
             style={{ width: 40, height: 40 }}
             aria-label="Previous posts"
           >
@@ -57,7 +57,7 @@ export default function LatestPostsScroller() {
 
           <button
             onClick={handleNext}
-            className="btn btn-outline-danger d-flex justify-content-center align-items-center"
+            className="btn btn-outline-danger me-2 border d-flex justify-content-center align-items-center"
             style={{ width: 40, height: 40 }}
             aria-label="Next posts"
           >
