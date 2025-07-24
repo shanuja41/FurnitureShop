@@ -82,7 +82,7 @@ export default function LatestPostsScroller() {
               <img
                 src={post.image}
                 alt={post.boldTitle}
-                className="card-img-top"
+                className="card-img-top post-card "
                 style={{ height: 300, width: "100%", objectFit: "cover" }}
               />
               <div className="card-body p-3">
